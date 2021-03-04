@@ -6,7 +6,7 @@ int main()
 {
     std::string line;
  
-    std::ifstream in("D:\\hello.txt"); // окрываем файл для чтения4
+    std::ifstream in("D:\\hello.txt"); // окрываем файл для чтения43
     if (in.is_open())
     {
         while (getline(in, line))
