@@ -3,7 +3,7 @@
  
 int main()
 {
-    std::ofstream out;          // поток для записи
+    std::ofstream out;          // поток для записи3
     out.open("D:\\hello.txt"); // окрываем файл для записи
     if (out.is_open())
     {
