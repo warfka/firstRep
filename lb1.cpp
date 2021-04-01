@@ -24,7 +24,7 @@ int main()
 
     }
    str[len + 1] = '\0';
-    cout << str << endl;
+    cout << str << endl<<endl;
     return 0;
 }
 
