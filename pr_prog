@@ -1,0 +1,80 @@
+#include <iostream>
+#include <math.h>
+#include <cstdlib>
+#include <locale>
+#include <fstream>
+using namespace std;
+int mult(int[], int);
+int sum(int[], int);
+
+
+
+
+int main()
+{
+   int mass[9];
+    //= {3, -10, 2, -4, 2, 7, 8, -5, 10}
+
+
+
+    FILE *in=fopen("/home/user/untitled9/mass.txt", "rt");//файл чтения
+
+       for(int i=0;i<9;i++)
+        {
+           fscanf(in,"%d",&mass[i]);
+        }
+
+/*
+    ifstream in;
+    int x=0;
+    int mass[9];
+    in.open("/home/user/untitled9/mass.txt");
+
+    while(!in.eof()){
+        in>>mass[x];
+        x++;
+    }
+*/
+    cout <<"Product of negative array elements:"<< mult(mass, 9)<<endl;
+    cout <<"The sum of the positive elements of the array located up to the maximum element: "<< sum(mass, 9) << endl;
+}
+
+int mult(int mass[],int c)
+{
+    int result=1;
+
+    for (int i = 0; i < c; i++)
+    {
+        if (mass[i] < 0) result *= mass[i];
+    }
+    if (result == 1) return 0;
+    else
+    {
+        return result;
+    }
+}
+
+int sum(int mass[], int c)
+{
+    int result = 0;
+    int CurrMax=mass[0];
+    int Max;
+
+    for (int i = 0; i < c; ++i)
+    {
+        if (mass[i] > CurrMax)
+        {
+            CurrMax = mass[i];
+            Max = i;
+        }
+    }
+
+    for (int j = 0; j < Max; j++)
+    {
+        if (mass[j] >= 0)
+        {
+            result = result + mass[j];
+        }
+    }
+    return result;
+}
