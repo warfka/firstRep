@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+/// N - размерность матрицы; A[N][N] - матрица коэффициентов, F[N] - столбец свободных членов,
+/// X[N] - начальное приближение, ответ записывается также в X[N];
+int main(int N, double** A, double* F, double* X)
+{
+	double eps = 0.00001;
+	double* TempX = new double[N];
+	double norm; // норма, определяемая как наибольшая разность компонент столбца иксов соседних итераций.
+
+	do {
+		for (int i = 0; i < N; i++) {
+			TempX[i] = F[i];
+			for (int g = 0; g < N; g++) {
+				if (i != g)
+					TempX[i] -= A[i][g] * X[g];
+			}
+			TempX[i] /= A[i][i];
+		}
+		norm = fabs(X[0] - TempX[0]);
+		for (int h = 0; h < N; h++) {
+			if (fabs(X[h] - TempX[h]) > norm)
+				norm = fabs(X[h] - TempX[h]);
+			X[h] = TempX[h];
+		}
+	} while (norm > eps);
+	return 0;
+}
