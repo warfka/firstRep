@@ -1,0 +1,154 @@
+//-----------------Передача в функцию параметров стандартных типов
+/*
+#include <cstdio>
+#include <cmath>
+#include <iostream>
+using namespace std;
+double cosh(double x, double eps); // прототип функции
+int main() {
+	double Xn, Xk, dX, eps;
+	printf("Enter Xn, Xk, dX, eps \n");
+	scanf_s("%lf%lf%lf%lf", &Xn, &Xk, &dX, &eps);
+	printf("| X | Y |\n");
+	for (double x = Xn; x <= Xk; x += dX)
+		printf("|%9.2lf |%14.6g |\n", x, cosh(x, eps));
+}
+double cosh(double x, double eps) {
+	setlocale(0, "");
+	const int MaxIter = 500; // максимальное количество итераций
+	double ch = 1, y = ch; // первый член ряда и нач. значение суммы
+	for (int n = 0; fabs(ch) > eps; n++) {
+		ch *= x * x / ((2 * n + 1) * (2 * n + 2)); // член ряда
+		y += ch; // добавление члена ряда к сумме
+		if (n > MaxIter) { puts("Ряд расходится!\n"); return 0; }
+	}
+	return y;
+}
+*/
+
+//Передача в функцию одномерных массивов
+/*
+#include <iostream>
+using namespace std;
+int n_posit(const int* a, const int n); // прототип функции
+int main() {
+	setlocale(0, "");
+	int n;
+	cout << "Введите количество элементов: "; cin >> n;
+	int* a = new int[n];
+	int* b = new int[n];
+	cout << "Введите элементы первого массива: ";
+	for (int i = 0; i < n; i++) cin >> a[i];
+	cout << "Введите элементы второго массива: ";
+	for (int i = 0; i < n; i++) cin >> b[i];
+	if (n_posit(a, n) > n_posit(b, n))
+		cout << " В первом положительных больше\n";
+	else if (n_posit(a, n) < n_posit(b, n))
+		cout << " Во втором положительных больше\n";
+	else cout << " Одинаковое количество\n";
+}
+int n_posit(const int* a, const int n) {
+	int count = 0;
+	for (int i = 0; i < n; i++) if (a[i] > 0) count++;
+	return count;
+}
+*/
+//Передача строк в функцию
+/*
+#include <fstream>
+#include <iostream>
+#include <cctype>
+using namespace std;
+int num_num(const char* str);
+int main() {
+	ifstream fin("test.txt");
+	if (!fin) { cout << "Нет файла test.txt" << endl; return 1; }
+	const int len = 101;
+	char str[len];
+	int i = 1;
+	while (fin.getline(str, len)) {
+		cout << "В строке " << i << " содержится " << num_num(str) << " чисел\n ";
+		i++;
+	}
+}
+int num_num(const char* str) {
+	int count = 0;
+	while (*str) {
+		if (isdigit(*str) && !isdigit(*(str + 1)) && *(str + 1) != '.')
+			count++;
+		str++;
+	}
+	return count;
+}
+*/
+
+//----------------Передача структур в функцию
+/*
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#pragma warning(suppress : 4996)
+using namespace std;
+const int l_name = 30;
+struct Man { // структура для хранения сведений об одном сотруднике
+	char name[l_name + 1];
+	int birth_year;
+	float pay;
+};
+Man read_data();
+int append2binfile(const Man& man, const char* filename);
+int print_from_bin(const char* filename);
+int main() {
+	setlocale(0, "");
+	bool contin; char y_n;
+	char filename[] = "dbase.bin";
+	do {
+		contin = false;
+		append2binfile(read_data(), filename);
+		cout << " Продолжить (y/n)? "; cin.get(y_n); cin.get();
+		if ((y_n == 'y') || (y_n == 'Y')) contin = true;
+	} while (contin);
+	print_from_bin(filename);
+}
+int append2binfile(const Man& man, const char* filename) {
+	setlocale(0, "");
+	ofstream fout(filename, ios::binary | ios::app); // бинарный файл для добавления
+	if (!fout) { cout << "Ошибка открытия файла." << endl; return 1; }
+	fout.write((char*)&man, sizeof(man));
+	fout.close();
+	return 0;
+}
+int print_from_bin(const char* filename) {
+	setlocale(0, "");
+	Man man;
+	ifstream fin(filename, ios::binary); // бинарный файл для чтения
+	if (!fin) { cout << "Ошибка открытия файла." << endl; return 1; }
+	fin.seekg(0, ios::end); // установка позиции на конец файла
+	int n_records = fin.tellg() / sizeof(man); // длина файла в записях
+	while (true) {
+		int num = 0;
+		cout << "Введите номер записи или -1: "; cin >> num;
+		if (num < 0 || num >= n_records) break;
+		fin.seekg(num * sizeof(man)); // абсолютное смещение на нужную запись
+		fin.read((char*)&man, sizeof(man));
+		cout << man.name << man.birth_year << ' ' << man.pay << endl;
+	}
+	return 0;
+}
+Man read_data() {
+	setlocale(0, "");
+	char name[l_name + 1];
+	cout << "Введите фамилию И.О. "; cin.getline(name, l_name + 1);
+	if (strlen(name) < l_name)
+		for (int i = strlen(name); i < l_name; i++) name[i] = ' ';
+	name[l_name] = 0;
+	Man man;
+	strncpy_s(man.name, name, l_name + 1);
+	const int buf_len = 80;
+	char buf[buf_len];
+	do { cout << "Введите год рождения "; cin.getline(buf, buf_len); }  while ((man.birth_year = atoi(buf)) == 0); // 1
+	do { cout << "Введите оклад "; cin.getline(buf, buf_len); }  while (!(man.pay = atof(buf))); // 2
+	return man;
+}
+*/
+
