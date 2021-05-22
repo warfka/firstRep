@@ -1,0 +1,127 @@
+#include <iostream>
+using namespace std;
+
+
+const int n = 10; //максимальное количество вершин в графе
+struct Graf
+{
+	int adj_matrix[n][n]; //матрица смежности
+	char vertices[n]; //список вершин
+	int last; //индекс последнего эл-та списка вершин
+} A;
+
+bool add_vertex();
+void Insert_arc();
+void Output_arc();
+
+
+int main()
+{
+	int input;
+	int CHECK=1;
+	while (CHECK)
+	{
+		cout << "___________MENU___________\n";
+		cout << "1. buy a ticket without booking\n";
+		cout << "2. buy a ticket by booking\n";
+		cout << "3. book a ticket\n";
+		cout << "4. delete a reservation\n";
+		cout << "5. show booked tickets\n";
+		cout << "6. show purchased tickets\n";
+		cout << "7. number of available seats\n";
+		cout << "8. help\n";
+		cout << "9. Exit\n";
+		cout << "Selection: ";
+		cin >> input;
+		switch (input) {
+		case 1:
+		{
+			buyDB();
+			break;
+		}
+		case 2:
+		{
+			buyB();
+			break;
+		}
+		case 3:
+			book();
+			break;
+		case 4:
+			deleteB();
+			break;
+		case 5:
+			showbook();
+			break;
+		case 6:
+			showbuy();
+			break;
+		case 7:
+			free();
+			break;
+		case 8:
+			cout << "help!!!\n";
+			break;
+		case 9:
+			CHECK=0;
+		default:
+			cout << "Error, bad input, quitting\n";
+			break;
+		}
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	A.last = -1; //список вершин пуст
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			A.adj_matrix[i][j] = 0;
+	// добавим в граф вершину а
+	if (Insert_vertex('a')) cout << "Вершина a добавлена в граф";
+	else cout << "Вершина a не добавлена. В списке вершиннет места";
+		//добавим остальные вершины b, c, d
+
+		// добавим в граф дугу(а,d)
+		Insert_arc(0, 3);
+	// добавим в граф остальные дуги
+
+		//покажем список смежных вершин для вершины c
+		Output_arc(2);
+	return 0;
+}
+
+/* Вставка новой вершины в список вершин графа. Если
+массив вершин заполнен полностью, то функция вернет
+false. При удачной вставке ̶ true. */
+bool add_vertex(char ver)
+{
+	if (A.last >= n - 1) return false;
+	else
+	{
+		A.vertices[++A.last] = ver;
+		return true;
+	}
+}
+
+/* Добавление в граф для вершины ver_begin смежной
+вершины ver_end (создание дуги из ver_begin в ver_end) */
+void add_arc(int ver_begin, int ver_end)
+{
+	setlocale(LC_ALL, "Russian");
+	A.adj_matrix[ver_begin][ver_end] = 1;
+	cout << "\nДуга из " << A.vertices[ver_begin] << " в" << A.vertices[ver_end] << " добавлена" << endl;
+}
+
+/* Показать список смежности для вершины ver_begin */
+void show_arc(int ver_begin)
+{
+	setlocale(LC_ALL, "Russian");
+	cout << "Список смежности для вершины " <<
+		A.vertices[ver_begin] << ": ";
+	for (int i = 0; i <= A.last; i++)
+		if (A.adj_matrix[ver_begin][i] == 1)
+			cout << " " << A.vertices[i];
+	cout << endl;
+}
