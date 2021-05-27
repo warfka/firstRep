@@ -1,8 +1,22 @@
-//first
+/*!
+	\brief функция поиска количества букв
+	\author egor
+	\version 1.0
+	\date 2021
+	\warning Данная труктура создана только в учебных целях
+
+*/
 #include <iostream>
 #include <cstring>
 using namespace std;
+/*!
+	\brief функция поиска количества букв
+	\author egor
+	\version 1.0
+	\date 2021
+	\warning Данная труктура создана только в учебных целях
 
+*/
 int main()
 {
   char str[1000];
