@@ -19,16 +19,24 @@ struct BOOK
 	int plase;
 	string name;
 };
+/*!
+	\brief структура
+	\author egor
+	\version 1.0
+	\date 2021
+	\warning Данная труктура создана только в учебных целях
+
+*/
 struct LISTBUY
 {
 	BUY elem[maxlen]; // массив элементов списка*   
-	int last=-1;  //индекс последнего эл-та списка
+	int last;  //индекс последнего эл-та списка
 };
 
 struct LISTBOOK
 {
 	BOOK elem[maxlen]; // массив элементов списка*   
-	int last=-1;  //индекс последнего эл-та списка
+	int last;  //индекс последнего эл-та списка
 };
 
 bool buyDB();

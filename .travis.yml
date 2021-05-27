@@ -1,0 +1,10 @@
+language: cpp 
+matrix:
+  include:
+     compiler: gcc
+script: 
+  - wc -l 2_struct.cpp
+branches:
+  only:
+    - master
+
