@@ -140,7 +140,7 @@ void add_way()
 	A.adj_matrix[ver_end][ver_begin] = 1;
 	cout << "\nПуть из " << A.med[ver_begin].name << " в" << A.med[ver_end].name << " добавлен" << endl;
 }
-void show_med()
+void show_med() //вывод на экран краткой информации (только название) о смежных вершинах для всех вершин графа;
 {
 	setlocale(LC_ALL, "Russian");
 	int i, j;
@@ -158,24 +158,35 @@ void show_med()
 		}
 	}
 }
+
 void del_med()
 {
 	setlocale(LC_ALL, "Russian");
-	if (A.last >= n - 1) cout << "Список медучереждений полон!\n";
-	else
+	int j;
+	int s = 0;
+	string name_check;
+	cout << "Название медучереждения:";
+	cin >> name_check;
+
+	for (j = 0; j < A.last; j++)
 	{
-		string check;
-		show_med();
-		cout << "Название медучереждения:";
-		cin >> check;
-		for (int i = 0; i < n; i++) 
-			if (check == A.med[A.last].name);
-		cout << "Тип учреждения (hospital, polyclinic, laboratory):";
-		cin >> A.med[A.last].type;
-		cout << "Медицинская специализация:";
-		cin >> A.med[A.last].spec;
-		--A.last;
+		if (name_check == A.med[j].name)
+		{	
+			for (int i = 0; i < n; i++)
+			{
+				A.adj_matrix[i][j] = 0;
+				A.adj_matrix[j][i] = 0;
+			}
+			s++;
+			for (int i = j - 1; i <= n-1; i++)
+				//перемещаем на одну позицию вверх
+				A.med[i] = A.med[i + 1];
+			
+		}
 	}
+	if (s < 1) cout << "error" << endl;
+	A.last--;
+
 }
 
 void del_way()
@@ -188,19 +199,19 @@ void del_way()
 	cout << "\nИндекс медучереждения 2: ";
 	cin >> ver_end;
 	A.adj_matrix[ver_begin][ver_end] = 0;
+	A.adj_matrix[ver_end][ver_begin] = 0;
 	cout << "\nПуть из " << A.med[ver_begin].name << " в" << A.med[ver_end].name << " добавлен" << endl;
 }
 
-/* Показать список смежности для вершины ver_begin */
 void show_lab()
 {
 	int ver_begin;
 	cout << "\nмедучереждение:";
 	cin >> ver_begin;
 	setlocale(LC_ALL, "Russian");
-	cout << "Список смежности для вершины " << A.med[ver_begin].name << ": ";
+	cout << "Список лабораторий для медучереждения " << A.med[ver_begin].name << ": ";
 	for (int i = 0; i <= A.last; i++)
-		if (A.adj_matrix[ver_begin][i] == 1 && ((A.med[i].name == "laboratory") || (A.med[i].name == "Laboratory")))
-			cout << " " << A.med[i].name;
+		if (A.adj_matrix[ver_begin][i] == 1 && ((A.med[i].type == "laboratory") || (A.med[i].type == "Laboratory")))
+			cout << " " << A.med[i].type;
 	cout << endl;
 }
