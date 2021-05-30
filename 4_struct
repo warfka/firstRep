@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <clocale>
 using namespace std;
-
 const int n = 5; //максимальное количество вершин в графе
 struct listMed
 {
@@ -13,22 +12,18 @@ struct listMed
 	string type;
 	string spec;
 };
-
 struct Graf
 {
 	int adj_matrix[n][n]; //матрица смежности
 	listMed med[n]; //список вершин
 	int last = -1; //индекс последнего эл-та списка вершин
 } A;
-
-
 void add_med();
 void add_way();
 void show_med();
 void del_med();
 void del_way();
 void show_lab();
-
 int main()
 {
 	for (int i = 0; i < n; i++)
@@ -38,7 +33,7 @@ int main()
 	for (int i = 0; i < n; i++) A.med[i].name = "0";
 
 	A.last = 0;
-	A.med[A.last].name= "BMI Healthcare";
+	A.med[A.last].name = "BMI Healthcare";
 	A.med[A.last].type = "polyclinic";
 	A.med[A.last].spec = "Cardiology";
 
@@ -75,14 +70,12 @@ int main()
 		cout << "___________MENU___________\n";
 		cout << "1. Add a medical facility\n"; //Добавить медицинское учреждение
 		cout << "2. Add a path between medical facilities\n"; //Добавить путь
-		cout << "3. Show the list of medical institutions ' connections\n"; //Показать список медучереждений
+		cout << "3. Show the list of medical institutions connections\n"; //Показать список медучереждений
 		cout << "4. Delete a medical facility\n"; //Удалить медучереждение
 		cout << "5. Delete Path\n"; //Удалить путь
 		cout << "6. Show a list of neighboring laboratories for a medical facility\n"; //Показать список соседних лабораторий
 		cout << "7. help\n";
 		cout << "8. Exit\n";
-
-		int i, j;
 		cout << "_________________________List of medical institutions__________________________\n";
 		cout << setw(2) << "# |"
 			<< setw(15) << " Name of the medical facility |"
@@ -91,7 +84,7 @@ int main()
 			<< endl;
 		for (int c = 0; c <= A.last; c++)
 		{
-			cout << c+1 <<  ") ";
+			cout << c + 1 << ") ";
 			cout << setw(35) << left << A.med[c].name;
 			cout << setw(20) << left << A.med[c].type;
 			cout << setw(30) << left << A.med[c].spec;
@@ -112,20 +105,31 @@ int main()
 			break;
 		}
 		case 3:
+		{
 			show_med();
 			break;
+		}
 		case 4:
+		{
 			del_med();
 			break;
+		}
+
 		case 5:
+		{
 			del_way();
 			break;
+		}
 		case 6:
+		{
 			show_lab();
 			break;
+		}
 		case 7:
+		{
 			cout << "help!!!\n";
 			break;
+		}
 		case 8:
 			CHECK = 0;
 		default:
@@ -143,16 +147,15 @@ int main()
 false. При удачной вставке ̶ true. */
 void add_med()
 {
-	setlocale(LC_ALL, "Russian");
-	if (A.last >= n - 1) cout << "Список медучереждений полон!\n";
+	if (A.last >= n - 1) cout << "The list of medical institutions is full!\n";
 	else
 	{
 		++A.last;
-		cout << "Название медучереждения:";
+		cout << "Name of the medical facility:";
 		cin >> A.med[A.last].name;
-		cout << "Тип учреждения (hospital, polyclinic, laboratory):";
+		cout << "Type of institution (hospital, polyclinic, laboratory):";
 		cin >> A.med[A.last].type;
-		cout << "Медицинская специализация:";
+		cout << "Medical specialization:";
 		cin >> A.med[A.last].spec;
 
 	}
@@ -162,7 +165,6 @@ void add_med()
 вершины ver_end (создание дуги из ver_begin в ver_end) */
 void add_way()
 {
-	setlocale(LC_ALL, "Russian");
 	/*int ver_begin, B; int ver_end, E;
 	cout << "медучереждение 1:";
 	cin >> ver_begin;
@@ -183,13 +185,12 @@ void add_way()
 	cin >> ver_begin;
 	cout << "\nMedical facility number 2: ";
 	cin >> ver_end;
-	A.adj_matrix[ver_begin-1][ver_end-1] = 1;
+	A.adj_matrix[ver_begin - 1][ver_end - 1] = 1;
 	A.adj_matrix[ver_end - 1][ver_begin - 1] = 1;
-	cout << "\nПуть из " << A.med[ver_begin].name << " в" << A.med[ver_end - 1].name << " добавлен" << endl;
+	cout << "\nPath from " << A.med[ver_begin-1].name << " to" << A.med[ver_end - 1].name << " add" << endl;
 }
 void show_med() //вывод на экран краткой информации (только название) о смежных вершинах для всех вершин графа;
 {
-	setlocale(LC_ALL, "Russian");
 	int i, j;
 	/*
 	cout << "________________________________________________________________________________\n";
@@ -207,32 +208,44 @@ void show_med() //вывод на экран краткой информации
 	}
 	cout << "_________________________________________________________________________________\n";
 	*/
-	
+
 	for (i = 0; i < n; i++)
 	{
 		if (A.med[i].name != "0")
 		{
-			cout << i << ") " << A.med[i].name;
-			cout << " непосредственный соседи: ";
+			cout << i+1 << ") " << A.med[i].name;
+			cout << " immediate neighbors: ";
 
 			for (j = 0; j < n; j++)
 				if (A.adj_matrix[i][j] == 1) cout << A.med[j].name << ", ";
-				//else cout << "-";
+			//else cout << "-";
 			cout << endl;
 		}
 	}
-	
+
 }
 
 void del_med()
 {
-	setlocale(LC_ALL, "Russian");
-	int j;
-	int s = 0;
-	string name_check;
-	cout << "Название медучереждения:";
-	cin >> name_check;
+	int i, w;
+	cout << "Medical facility number:";
+	cin >> w;
+	w = w - 1;
+	for (i = w; i <= A.last; i++)
+		A.med[i] = A.med[i + 1];
 
+	for (int i = w; i < n-1; i++)
+		A.adj_matrix[w][i] = A.adj_matrix[w][i + 1];
+	for (int j = w; j < n-1; j++)
+		A.adj_matrix[j][w] = A.adj_matrix[j + 1][w];
+
+	for (int i = 0; i < n; i++)
+		A.adj_matrix[w][i] = 0;
+	for (int j = 0; j < n; j++)
+		A.adj_matrix[j][w] = 0;
+
+	A.last--;
+	/*
 	for (j = 0; j < A.last; j++)
 	{
 		if (name_check == A.med[j].name)
@@ -243,15 +256,14 @@ void del_med()
 				A.adj_matrix[j][i] = 0;
 			}
 			s++;
-			for (int i = j - 1; i <= n - 1; i++)
+			for (int i = j - 1; i <= n-1; i++)
 				//перемещаем на одну позицию вверх
 				A.med[i] = A.med[i + 1];
 
 		}
 	}
 	if (s < 1) cout << "error" << endl;
-	A.last--;
-
+	*/
 }
 
 void del_way()
@@ -259,24 +271,25 @@ void del_way()
 	setlocale(LC_ALL, "Russian");
 	int ver_begin; int ver_end;
 	void show_med();
-	cout << "\nИндекс медучереждения 1: ";
+	cout << "\nMedical facility number 1: ";
 	cin >> ver_begin;
-	cout << "\nИндекс медучереждения 2: ";
+	cout << "\nMedical facility number 2: ";
 	cin >> ver_end;
+	ver_end--; ver_begin--;
 	A.adj_matrix[ver_begin][ver_end] = 0;
 	A.adj_matrix[ver_end][ver_begin] = 0;
-	cout << "\nПуть из " << A.med[ver_begin].name << " в" << A.med[ver_end].name << " добавлен" << endl;
+	cout << "\nPath from " << A.med[ver_begin].name << " to" << A.med[ver_end].name << " deleted." << endl;
 }
 
 void show_lab()
 {
 	int ver_begin;
-	cout << "\nмедучереждение:";
+	cout << "\nMedical facility number:";
 	cin >> ver_begin;
-	setlocale(LC_ALL, "Russian");
-	cout << "Список лабораторий для медучереждения " << A.med[ver_begin].name << ": ";
+	ver_begin--;
+	cout << "Neighboring laboratories for medical institutions" << A.med[ver_begin].name << ": ";
 	for (int i = 0; i <= A.last; i++)
 		if (A.adj_matrix[ver_begin][i] == 1 && ((A.med[i].type == "laboratory") || (A.med[i].type == "Laboratory")))
-			cout << " " << A.med[i].type;
+			cout << A.med[i].name << ", ";
 	cout << endl;
 }
