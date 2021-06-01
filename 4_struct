@@ -231,39 +231,29 @@ void del_med()
 	cout << "Medical facility number:";
 	cin >> w;
 	w = w - 1;
+
 	for (i = w; i <= A.last; i++)
 		A.med[i] = A.med[i + 1];
 
-	for (int i = w; i < n-1; i++)
-		A.adj_matrix[w][i] = A.adj_matrix[w][i + 1];
-	for (int j = w; j < n-1; j++)
-		A.adj_matrix[j][w] = A.adj_matrix[j + 1][w];
+	/*код удаления столбца */
+	for (int i = 0; i < n-1; i++)
+		for (int j = w; j < n - 1; j++)
+			A.adj_matrix[i][j] = A.adj_matrix[i][j + 1];
 
-	for (int i = 0; i < n; i++)
+	/*код удаления строки */
+	for (int i = w; i < n - 1; i++)
+		for (int j = 0; j < n-1; j++)
+			A.adj_matrix[j][i] = A.adj_matrix[j + 1][i];;
+
+
+
+
+	/*for (int i = 0; i < n; i++)
 		A.adj_matrix[w][i] = 0;
 	for (int j = 0; j < n; j++)
 		A.adj_matrix[j][w] = 0;
-
+		*/
 	A.last--;
-	/*
-	for (j = 0; j < A.last; j++)
-	{
-		if (name_check == A.med[j].name)
-		{
-			for (int i = 0; i < n; i++)
-			{
-				A.adj_matrix[i][j] = 0;
-				A.adj_matrix[j][i] = 0;
-			}
-			s++;
-			for (int i = j - 1; i <= n-1; i++)
-				//перемещаем на одну позицию вверх
-				A.med[i] = A.med[i + 1];
-
-		}
-	}
-	if (s < 1) cout << "error" << endl;
-	*/
 }
 
 void del_way()
