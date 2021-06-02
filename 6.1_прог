@@ -1,0 +1,105 @@
+#include<iostream>
+#include<ctype.h>
+#include<string.h>
+#include<conio.h>
+#include <cstdlib>
+//#include<vcl.h>
+#pragma hdrstop
+//#pragma argsused
+using namespace std;
+char* rus(const char* text);
+int compare(const void* price1, const void* price2);
+
+const int k = 30;
+struct PRICE
+{
+
+	char goods[k];
+	char magazin[k];
+	double cost; 
+};
+int main()
+{
+	int i, n;
+	char magazin_name[k];
+	bool not_found; 
+	cout << rus(" BBeauTe KonuuecTBo CTpykTyp PRICE: "); cin >> n;
+	cout << "\n";
+
+	PRICE * price = new PRICE[n];
+
+	for (i = 0; i < n; i++)
+
+	{
+		cout << ' ' << (i + 1) << rus(".BBeguTe Ha3BaHue ToBapa: ");
+		cin.ignore(); cin.getline(price[i].goods, k); //BBoA,
+		cout << rus(" BBeguTe Ha3BaHue Mara3nHa: ");
+		cin.getline(price[i].magazin, k); //aHHbIx
+		cout << rus(" BBeguTe eHy ToBapa: "); cin >> price[i].cost;
+		cout << "\n";
+	}
+	qsort(price, n, sizeof(PRICE), compare); //BbI30B PYHKLUNN AA COPTUPOBKU.
+	cout << rus(" 3anucv ynopafo4eHHble B aaBUTHOM NopagKe No Ha3BaHVAM Mara3VHOE\n\n");
+		for (i = 0; i < n; i++)
+
+		{ //BbI30B PYHKUMN ANA COpTMpOBKU
+
+			cout << rus(" Ha3BaHve ToBapa: ") << price[i].goods << endl;
+
+			cout << rus(" Ha3BaHve Mara3vna: ") << price[i].magazin << endl;
+
+			cout << rus(" LleHa ToBapa: ") << price[i].cost << endl;
+
+			cout << endl;
+
+		}
+	cin.ignore();
+	cout << rus("\n UHopmalia 0 ToBapax, NposarOlXxcA B Mara3uHe Ha3BaHue KOTOpOroO)BBefeHO C KaBuatypbi : ")<<endl;
+		while (true)
+
+		{
+			cout << endl;
+
+			cout << rus(" BBeAuTe Ha3BaHue Mara3viHa WV COBO ""\"end\" ANA OKOHYaHUA: ");
+			cin.getline(magazin_name, k);
+
+			cout << endl;
+
+			if (strcmp(magazin_name, "end") == 0)break;
+
+			not_found = true;
+
+			for (i = 0; i < n; i++) //Mouck
+
+			{ //BBEQeHHOFO Ha3BaHUA Mara3iHa
+				if (strcmp(price[i].magazin, magazin_name) == 0) //B CTpykKType
+				{
+
+					cout << rus(" Ha3BaHve ToBapa: ") << price[i].goods << endl; //BbiBOA
+					cout << rus(" LleHa ToBapa: ") << price[i].cost << endl;  //3anpoweHHon
+					not_found = false; //Mndopmaunu
+
+				}
+			} //ecnv HeT Tako UHPOpMalNN BbIBOAUTCA COO6LEHUe
+			if (not_found)cout << rus(" Takoro Mara3VHa HeT!") << endl << endl;
+		}
+	//getch();
+	return 0;
+}
+
+int compare(const void* price1, const void* price2) //pyHkKUMA AA COPTUPOBKU
+{
+	return strcmp((reinterpret_cast<const PRICE*>(price1))->magazin,
+		(reinterpret_cast<const PRICE*>(price2))->magazin);
+}
+
+/*
+char bufrus[256];
+char* rus(const char* text)
+
+{
+	CharToOem(text, bufrus);
+	return bufrus;
+
+}
+*/
