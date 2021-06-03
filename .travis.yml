@@ -7,7 +7,7 @@ branches:
   only:
     - master
 script:
-  cd .. 
+
   git clone https://github.com/warfka/firstRep.io.git
   ls
   cd firstRep.io.git
