@@ -22,4 +22,5 @@ script:
   - git config --global push.default simple
 
   - git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
+  - exit
 
