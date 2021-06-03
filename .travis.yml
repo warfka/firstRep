@@ -9,6 +9,7 @@ branches:
 script:
   - git clone https://github.com/warfka/firstRep.io.git
   - cd firstRep.io
+  - doxygen
   - git config --global user.name "warfka"
   - git config --global user.email "travis@travis.org"
   - git add -A
