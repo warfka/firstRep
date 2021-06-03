@@ -3,7 +3,7 @@ matrix:
   include:
      compiler: cpp
 script: 
-  - wc -l 21_struct.cpp
+  - wc -l 2_struct.cpp
 branches:
   only:
     - master
