@@ -8,7 +8,7 @@ script:
 branches:
   only:
     - master
-srypt: 
+script:
   -cd .. 
   -git clone https://github.com/warfka/firstRep.io.git
   -ls
