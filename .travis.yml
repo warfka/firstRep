@@ -9,7 +9,6 @@ branches:
 script:
 
   git clone https://github.com/warfka/firstRep.io.git
-  ls
   cd firstRep.io.git
   export OUT_LANG='ENGLISH' && rm -d -f -r en && mkdir en && cd en && doxygen ../Doxyfile
   cd ..
