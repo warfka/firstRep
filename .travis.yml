@@ -8,7 +8,7 @@ branches:
     - master
 script:
   - git clone https://github.com/warfka/firstRep.io.git
-  - cd firstRep.io.git
+  - cd firstRep.io
   - export OUT_LANG='ENGLISH' && rm -d -f -r en && mkdir en && cd en && doxygen ../Doxyfile
   - export OUT_LANG='RUSSIAN' && rm -d -f -r ru && mkdir ru && cd ru && doxygen ../Doxyfile
   - git config --global user.name "warfka"
