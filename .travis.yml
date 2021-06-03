@@ -7,13 +7,13 @@ branches:
   only:
     - master
 script:
-  git clone https://github.com/warfka/firstRep.io.git
-  cd firstRep.io.git
-  export OUT_LANG='ENGLISH' && rm -d -f -r en && mkdir en && cd en && doxygen ../Doxyfile
-  export OUT_LANG='RUSSIAN' && rm -d -f -r ru && mkdir ru && cd ru && doxygen ../Doxyfile
-  git config --global user.name "warfka"
-  git config --global user.email "travis@travis.org"
-  git add -A
-  git commit -am "Update doc from Travis CI"
-  git config --global push.default simple
-  git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
+  - git clone https://github.com/warfka/firstRep.io.git
+  - cd firstRep.io.git
+  - export OUT_LANG='ENGLISH' && rm -d -f -r en && mkdir en && cd en && doxygen ../Doxyfile
+  - export OUT_LANG='RUSSIAN' && rm -d -f -r ru && mkdir ru && cd ru && doxygen ../Doxyfile
+  - git config --global user.name "warfka"
+  - git config --global user.email "travis@travis.org"
+  - git add -A
+  - git commit -am "Update doc from Travis CI"
+  - git config --global push.default simple
+  - git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
