@@ -1,3 +1,22 @@
+
+/----------------------------
+	do {
+		cout << pt(1);
+		a = x1;
+		x1 = (10.41 - 4.21 * x2 - 4.12 * x3) / 34.25;
+		b = x2;
+		x2 = (20.43 - 1.12 * x1 - 1.52 * x3) / 41.49;
+		c = x3;
+		x3 = (12.34 - 2.54 * x1 - 4.85 * x2) / 30.92;
+		
+		A = fabs(x1 - a);
+		B = fabs(x2 - b);
+		C = fabs(x3 - c);
+		norm = max(A, B);
+		norm = max(norm, C);
+		cout << "\nnorm=" << norm << "\nx1=" << x1 << "\nx2=" << x2 << "\nx3=" << x3;
+	} while (norm > eps);
+/----------------------------------
 #include <iostream>
 #include <vector>
 #include <cmath>
