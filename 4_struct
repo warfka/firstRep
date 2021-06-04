@@ -209,7 +209,7 @@ void show_med() //вывод на экран краткой информации
 	cout << "_________________________________________________________________________________\n";
 	*/
 
-	for (i = 0; i < n; i++)
+	for (i = 0; i <= A.last; i++)
 	{
 		if (A.med[i].name != "0")
 		{
@@ -225,37 +225,58 @@ void show_med() //вывод на экран краткой информации
 
 }
 
-void del_med()
+void del_med() 
 {
-	int i, w;
-	cout << "Medical facility number:";
-	cin >> w;
-	w = w - 1;
 
-	for (i = w; i <= A.last; i++)
-		A.med[i] = A.med[i + 1];
+	int ind;
 
-	/*код удаления столбца */
-	for (int i = 0; i < n-1; i++)
-		for (int j = w; j < n - 1; j++)
-			A.adj_matrix[i][j] = A.adj_matrix[i][j + 1];
+	listMed change;
 
-	/*код удаления строки */
-	for (int i = w; i < n - 1; i++)
-		for (int j = 0; j < n-1; j++)
-			A.adj_matrix[j][i] = A.adj_matrix[j + 1][i];;
+	if (A.last < 0) cout << "Error!No Medical facilitys for deleting!" << endl;
 
+	else
 
+	{
+		cout << "Enter number of deleted medical facility "; cin >> ind;
+		ind = ind - 1;
+		if (ind > A.last || ind > A.last < 0) cout << "Error!Enter exit number!" << endl;
+		else {
 
+			for (int i = 0; i <= A.last; i++) 
+			{
+				if (i >= ind) 
+				{
+					change = A.med[i];
+					A.med[i] = A.med[i + 1];
+					A.med[i + 1] = change;
+				}
+			}
 
-	/*for (int i = 0; i < n; i++)
-		A.adj_matrix[w][i] = 0;
-	for (int j = 0; j < n; j++)
-		A.adj_matrix[j][w] = 0;
-		*/
-	A.last--;
+			cout << endl;
+
+			A.last = A.last - 1;
+
+			for (int i = ind; i <= A.last + 1; i++)
+
+				for (int j = 0; j <= A.last + 1; j++)
+
+					A.adj_matrix[i][j] = A.adj_matrix[i + 1][j];
+
+			for (int i = 0; i <= A.last + 1; i++)
+
+				for (int j = ind; j <= A.last + 1; j++)
+
+					A.adj_matrix[i][j] = A.adj_matrix[i][j + 1];
+
+			cout << endl;
+
+			cout << "Medical facility was deleted." << endl;
+		}
+
+	}
+
+	cout << endl;
 }
-
 void del_way()
 {
 	setlocale(LC_ALL, "Russian");
