@@ -1,13 +1,9 @@
 #include <string>
-#include <iostream>
-#include <fstream>
-#include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <stdlib.h>
+#include <iostream>
 using namespace std;
-const int maxlen = 100;//размер массива
-
 struct BUY
 {
 	int row;
@@ -19,26 +15,184 @@ struct BOOK
 	int plase;
 	string name;
 };
-struct LISTBUY
+struct BUYList //описание узла списка
 {
-	BUY elem;
-	LISTBUY* next;
-	LISTBUY* prev;
+	BUY info; //информационное поле
+	BUYList* next; //указатель на следующий элемент
+	BUYList* prev; //указатель на предыдущий элемент
 };
-LISTBUY* head = NULL;
-LISTBUY* tail = NULL;
+BUYList* headbuy; //указатель на первый элемент списка
 
-struct LISTBOOK
+struct BOOKList //описание узла списка
 {
-	BOOK elem;
-	LISTBOOK* next;
-	LISTBOOK* prev;
+	BOOK info; //информационное поле
+	BOOKList* next; //указатель на следующий элемент
+	BOOKList* prev; //указатель на предыдущий элемент
 };
-LISTBOOK* head = NULL;
-LISTBOOK* tail = NULL;
+BOOKList* headbook; //указатель на первый элемент списка
+
+void AddBUYList();
+int DeleteBUYList(int position);
+void PrintBUYList();
+
+void AddBOOKList();
+int DeleteBOOKList(int position);
+void PrintBOOKList();
+
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	int value, position, x;
+	do
+	{
+		cout << "1. Add a purchased ticket" << endl;
+		cout << "2. Delete a purchased ticket" << endl;
+		cout << "3. Display a list of purchased tickets" << endl;
+		cout << "0. Exit" << endl;
+		cout << "\nOperation number > "; cin >> x;
+		switch (x)
+		{
+		case 1:
+			AddBUYList(); break;
+		case 2:
+			cout << "Позиция > "; cin >> position;
+			DeleteBUYList(position); break;
+		case 3: PrintBUYList(); break;
+		}
+	} while (x != 0);
+}
+
+void AddBUYList()
+{
+	int value1, value2, position;
+	cout << "Row > "; cin >> value1;
+	cout << "Plase > "; cin >> value2;
+	cout << "Позиция > "; cin >> position;
+	BUYList* node = new BUYList; //создание нового элемента
+	node->info.row = value1; //присвоение элементу значения
+	node->info.plase = value2;
+	if (headbuy == NULL) //если список пуст
+	{
+		node->next = node; //установка указателя next
+		node->prev = node; //установка указателя prev
+		headbuy = node; //определяется голова списка
+	}
+	else
+	{
+		BUYList* p = headbuy;
+		for (int i = position; i > 1; i--) p = p->next;
+		p->prev->next = node;
+		node->prev = p->prev;
+		node->next = p;
+		p->prev = node;
+	}
+	cout << "\nЭлемент добавлен...\n\n";
+}
+
+void AddBOOKList()
+{
+	int value1, value2, value3, position;
+	cout << "Row > "; cin >> value1;
+	cout << "Plase > "; cin >> value2;
+	cout << "Name > "; cin >> value3;
+	cout << "Позиция > "; cin >> position;
+	BOOKList* node = new BOOKList; //создание нового элемента
+	node->info.row = value1; //присвоение элементу значения
+	node->info.plase = value2;
+	node->info.name = value3;
+	if (headbook == NULL) //если список пуст
+	{
+		node->next = node; //установка указателя next
+		node->prev = node; //установка указателя prev
+		headbook = node; //определяется голова списка
+	}
+	else
+	{
+		BOOKList* p = headbook;
+		for (int i = position; i > 1; i--) p = p->next;
+		p->prev->next = node;
+		node->prev = p->prev;
+		node->next = p;
+		p->prev = node;
+	}
+	cout << "\nЭлемент добавлен...\n\n";
+}
+
+//***********************УДАЛЕНИЕ ЭЛЕМЕНТА***********************
+int DeleteBUYList(int position)
+{
+	if (headbuy == NULL) { cout << "\nСписок пуст\n\n"; return 0; }
+	if (headbuy == headbuy->next)
+	{
+		delete headbuy;
+		headbuy = NULL;
+	}
+	else
+	{
+		BUYList* a = headbuy;
+		for (int i = position; i > 1; i--) a = a->next;
+		if (a == headbuy) headbuy = a->next;
+		a->prev->next = a->next;
+		a->next->prev = a->prev;
+		delete a;
+	}
+	cout << "\nЭлемент удален...\n\n";
+}
+//*************************ВЫВОД СПИСКА*************************
+void PrintBUYList()
+{
+	if (headbuy == NULL) cout << "\nСписок пуст\n\n";
+	else
+	{
+		BUYList* a = headbuy;
+		cout << "\nЭлементы списка: ";
+		do
+		{
+			cout << "row: "<< a->info.row << ", plase:";
+			cout << a->info.plase << " \n";
+			a = a->next;
+		} while (a != headbuy); cout << "\n\n";
+	}
+}
+
+/*struct BUY
+{
+	int row;
+	int plase;
+};
+struct BOOK
+{
+	int row;
+	int plase;
+	string name;
+};
+
+struct Elem_buy
+{
+	BUY info; // информационное поле звена
+	Elem_buy* next; // указатель на следующее звено
+	Elem_buy* prev; // указатель на предыдущее звено
+};
+Elem_buy* head = NULL; // указатель на начало
+Elem_buy* tail = NULL; // указатель на конец
+
+struct Elem_book
+{
+	BOOK info; // информационное поле звена
+	Elem_book* next; // указатель на следующее звено
+	Elem_book* prev; // указатель на предыдущее звено
+};
+Elem_book* head = NULL; // указатель на начало
+Elem_book* tail = NULL; // указатель на конец
+*/
 
 
-bool buyDB();
+
+
+
+
+
+/*bool buyDB();
 bool buyB();
 bool book();
 bool deleteB();
@@ -46,12 +200,13 @@ char showbuy();
 char showbook();
 void free();
 
-LISTBOOK bookTicket;
-LISTBUY buyTicket;
 
 
 int main()
 {
+
+
+
 	int input;
 	while (1)
 	{
@@ -234,4 +389,4 @@ void free()
 	cout << "number of tickets booked: " << bookTicket.last + 1 << endl;
 	cout << "number of tickets purchased: " << buyTicket.last + 1 << endl;
 
-}
+}*/
