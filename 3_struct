@@ -4,17 +4,18 @@
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
-struct BUY
-{
-	int row;
-	int plase;
-};
 struct BOOK
 {
 	int row;
 	int plase;
 	string name;
 };
+struct BUY
+{
+	int row;
+	int plase;
+};
+
 struct BUYList //описание узла списка
 {
 	BUY info; //информационное поле
@@ -32,34 +33,39 @@ struct BOOKList //описание узла списка
 BOOKList* headbook; //указатель на первый элемент списка
 
 void AddBUYList();
-int DeleteBUYList(int position);
+int DeleteBUYList();
 void PrintBUYList();
 
 void AddBOOKList();
-int DeleteBOOKList(int position);
+//int DeleteBOOKList();
 void PrintBOOKList();
 
 void main()
 {
-	setlocale(LC_ALL, "Rus");
-	int value, position, x;
+	int x;
 	do
 	{
-		cout << "1. Add a purchased ticket" << endl;
-		cout << "2. Delete a purchased ticket" << endl;
-		cout << "3. Display a list of purchased tickets" << endl;
-		cout << "0. Exit" << endl;
-		cout << "\nOperation number > "; cin >> x;
+		cout << "___________MENU___________\n";
+		cout << "1. buy a ticket without booking\n";
+		cout << "2. buy a ticket by booking\n";
+		cout << "3. book a ticket\n";
+		cout << "4. delete a reservation\n";
+		cout << "5. show booked tickets\n";
+		cout << "6. show purchased tickets\n";
+		cout << "7. number of available seats\n";
+		cout << "8. help\n";
+		cout << "9. Exit\n";
+		cout << "Selection: "; cin >> x;
 		switch (x)
 		{
-		case 1:
-			AddBUYList(); break;
-		case 2:
-			cout << "Позиция > "; cin >> position;
-			DeleteBUYList(position); break;
-		case 3: PrintBUYList(); break;
+		case 1: AddBUYList(); break;
+		case 2:  break;
+		case 3: AddBOOKList(); break;
+		case 4: //DeleteBOOKList(); break;
+		case 5: PrintBOOKList(); break;
+		case 6: PrintBUYList(); break;
 		}
-	} while (x != 0);
+	} while (x != 9);
 }
 
 void AddBUYList()
@@ -67,7 +73,7 @@ void AddBUYList()
 	int value1, value2, position;
 	cout << "Row > "; cin >> value1;
 	cout << "Plase > "; cin >> value2;
-	cout << "Позиция > "; cin >> position;
+	cout << "Position > "; cin >> position;
 	BUYList* node = new BUYList; //создание нового элемента
 	node->info.row = value1; //присвоение элементу значения
 	node->info.plase = value2;
@@ -86,20 +92,19 @@ void AddBUYList()
 		node->next = p;
 		p->prev = node;
 	}
-	cout << "\nЭлемент добавлен...\n\n";
+	cout << "\nTicket purchased...\n\n";
 }
+
 
 void AddBOOKList()
 {
-	int value1, value2, value3, position;
-	cout << "Row > "; cin >> value1;
-	cout << "Plase > "; cin >> value2;
-	cout << "Name > "; cin >> value3;
-	cout << "Позиция > "; cin >> position;
 	BOOKList* node = new BOOKList; //создание нового элемента
-	node->info.row = value1; //присвоение элементу значения
-	node->info.plase = value2;
-	node->info.name = value3;
+	int v1, v2, v3, pos;
+	cout << "Row > "; cin >> node->info.row;
+	cout << "Plase > "; cin >> node->info.plase;
+	cout << "Name > "; cin >> node->info.name;
+	cout << "Position > "; cin >> pos;
+	
 	if (headbook == NULL) //если список пуст
 	{
 		node->next = node; //установка указателя next
@@ -109,19 +114,21 @@ void AddBOOKList()
 	else
 	{
 		BOOKList* p = headbook;
-		for (int i = position; i > 1; i--) p = p->next;
+		for (int i = pos; i > 1; i--) p = p->next;
 		p->prev->next = node;
 		node->prev = p->prev;
 		node->next = p;
 		p->prev = node;
 	}
-	cout << "\nЭлемент добавлен...\n\n";
+	cout << "\nTicket booked...\n\n";
 }
 
 //***********************УДАЛЕНИЕ ЭЛЕМЕНТА***********************
-int DeleteBUYList(int position)
+int DeleteBUYList()
 {
-	if (headbuy == NULL) { cout << "\nСписок пуст\n\n"; return 0; }
+	int position;
+	cout << "Position > "; cin >> position;
+	if (headbuy == NULL) { cout << "\nThe list is empty\n\n"; return 0; }
 	if (headbuy == headbuy->next)
 	{
 		delete headbuy;
@@ -141,17 +148,33 @@ int DeleteBUYList(int position)
 //*************************ВЫВОД СПИСКА*************************
 void PrintBUYList()
 {
-	if (headbuy == NULL) cout << "\nСписок пуст\n\n";
+	if (headbuy == NULL) cout << "\nThe list is empty\n\n";
 	else
 	{
 		BUYList* a = headbuy;
-		cout << "\nЭлементы списка: ";
+		cout << "\nPurchased tickets: ";
 		do
 		{
-			cout << "row: "<< a->info.row << ", plase:";
+			cout << "row: " << a->info.row << ", plase:";
 			cout << a->info.plase << " \n";
 			a = a->next;
 		} while (a != headbuy); cout << "\n\n";
+	}
+}
+
+void PrintBOOKList()
+{
+	if (headbook == NULL) cout << "\nThe list is empty\n\n";
+	else
+	{
+		BOOKList* a = headbook;
+		cout << "\nBooked tickets: ";
+		do
+		{
+			cout << "row: " << a->info.row << ", plase:";
+			cout << a->info.plase << ", name:" << a->info.name << " \n";
+			a = a->next;
+		} while (a != headbook); cout << "\n\n";
 	}
 }
 
