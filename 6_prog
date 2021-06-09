@@ -20,10 +20,11 @@ struct PRICE
 };
 int main()
 {
+	setlocale(LC_ALL, "Russian");
 	int i, n;
 	char magazin_name[k];
 	bool not_found; 
-	cout << " BBeauTe KonuuecTBo CTpykTyp PRICE: "; cin >> n;
+	cout << " Введите количество структур PRICE: "; cin >> n;
 	cout << "\n";
 
 	PRICE * price = new PRICE[n];
@@ -31,36 +32,36 @@ int main()
 	for (i = 0; i < n; i++)
 
 	{
-		cout << ' ' << (i + 1) << ".BBeguTe Ha3BaHue ToBapa: ";
+		cout << ' ' << (i + 1) << "Введите название товара: ";
 		cin.ignore(); cin.getline(price[i].goods, k); //BBoA,
-		cout << " BBeguTe Ha3BaHue Mara3nHa: ";
+		cout << " Введите название магазина: ";
 		cin.getline(price[i].magazin, k); //aHHbIx
-		cout << " BBeguTe eHy ToBapa: "; cin >> price[i].cost;
+		cout << " Введите цену товара: "; cin >> price[i].cost;
 		cout << "\n";
 	}
 	qsort(price, n, sizeof(PRICE), compare); //BbI30B PYHKLUNN AA COPTUPOBKU.
-	cout << " 3anucv ynopafo4eHHble B aaBUTHOM NopagKe No Ha3BaHVAM Mara3VHOE\n\n";
+	cout << " Записи упорядоченные в алфавитном порядке по названиям магазинов:\n\n";
 		for (i = 0; i < n; i++)
 
 		{ //BbI30B PYHKUMN ANA COpTMpOBKU
 
-			cout << " Ha3BaHve ToBapa: " << price[i].goods << endl;
+			cout << " Название товара: " << price[i].goods << endl;
 
-			cout << " Ha3BaHve Mara3vna: " << price[i].magazin << endl;
+			cout << " Название магазина: " << price[i].magazin << endl;
 
-			cout << " LleHa ToBapa: " << price[i].cost << endl;
+			cout << " Цена товара: " << price[i].cost << endl;
 
 			cout << endl;
 
 		}
 	cin.ignore();
-	cout << "\n UHopmalia 0 ToBapax, NposarOlXxcA B Mara3uHe Ha3BaHue KOTOpOroO)BBefeHO C KaBuatypbi : "<<endl;
+	cout << "\n Информация о товарах, продающихся в магазине Ha3BaHue которого введено с клавиатуры : "<<endl;
 		while (true)
 
 		{
 			cout << endl;
 
-			cout << " BBeAuTe Ha3BaHue Mara3viHa WV COBO ""\"end\" ANA OKOHYaHUA: ";
+			cout << " Введите название магазина или слово ""\"end\" для завершения: ";
 			cin.getline(magazin_name, k);
 
 			cout << endl;
@@ -75,13 +76,13 @@ int main()
 				if (strcmp(price[i].magazin, magazin_name) == 0) //B CTpykKType
 				{
 
-					cout << " Ha3BaHve ToBapa: " << price[i].goods << endl; //BbiBOA
-					cout << " LleHa ToBapa: " << price[i].cost << endl;  //3anpoweHHon
+					cout << " Название товара: " << price[i].goods << endl; //BbiBOA
+					cout << " Цена товара: " << price[i].cost << endl;  //3anpoweHHon
 					not_found = false; //Mndopmaunu
 
 				}
 			} //ecnv HeT Tako UHPOpMalNN BbIBOAUTCA COO6LEHUe
-			if (not_found)cout << " Takoro Mara3VHa HeT!" << endl << endl;
+			if (not_found)cout << " Такого товара нет!" << endl << endl;
 		}
 	//getch();
 	return 0;
