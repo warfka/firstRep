@@ -3,11 +3,8 @@
 #include<string.h>
 #include<conio.h>
 #include <cstdlib>
-//#include<vcl.h>
 #pragma hdrstop
-//#pragma argsused
 using namespace std;
-//char* rus(const char* text);
 int compare(const void* price1, const void* price2);
 
 const int k = 30;
@@ -33,17 +30,17 @@ int main()
 
 	{
 		cout << ' ' << (i + 1) << "Введите название товара: ";
-		cin.ignore(); cin.getline(price[i].goods, k); //BBoA,
+		cin.ignore(); cin.getline(price[i].goods, k);
 		cout << " Введите название магазина: ";
-		cin.getline(price[i].magazin, k); //aHHbIx
+		cin.getline(price[i].magazin, k);
 		cout << " Введите цену товара: "; cin >> price[i].cost;
 		cout << "\n";
 	}
-	qsort(price, n, sizeof(PRICE), compare); //BbI30B PYHKLUNN AA COPTUPOBKU.
+	qsort(price, n, sizeof(PRICE), compare);
 	cout << " Записи упорядоченные в алфавитном порядке по названиям магазинов:\n\n";
 		for (i = 0; i < n; i++)
 
-		{ //BbI30B PYHKUMN ANA COpTMpOBKU
+		{
 
 			cout << " Название товара: " << price[i].goods << endl;
 
@@ -57,7 +54,6 @@ int main()
 	cin.ignore();
 	cout << "\n Информация о товарах, продающихся в магазине Ha3BaHue которого введено с клавиатуры : "<<endl;
 		while (true)
-
 		{
 			cout << endl;
 
@@ -70,37 +66,27 @@ int main()
 
 			not_found = true;
 
-			for (i = 0; i < n; i++) //Mouck
+			for (i = 0; i < n; i++) 
 
-			{ //BBEQeHHOFO Ha3BaHUA Mara3iHa
-				if (strcmp(price[i].magazin, magazin_name) == 0) //B CTpykKType
+			{ 
+				if (strcmp(price[i].magazin, magazin_name) == 0) 
 				{
 
-					cout << " Название товара: " << price[i].goods << endl; //BbiBOA
-					cout << " Цена товара: " << price[i].cost << endl;  //3anpoweHHon
-					not_found = false; //Mndopmaunu
+					cout << " Название товара: " << price[i].goods << endl; 
+					cout << " Цена товара: " << price[i].cost << endl;  
+					not_found = false; 
 
 				}
-			} //ecnv HeT Tako UHPOpMalNN BbIBOAUTCA COO6LEHUe
+			}
 			if (not_found)cout << " Такого товара нет!" << endl << endl;
 		}
-	//getch();
 	return 0;
 }
 
-int compare(const void* price1, const void* price2) //pyHkKUMA AA COPTUPOBKU
+int compare(const void* price1, const void* price2)
 {
 	return strcmp((reinterpret_cast<const PRICE*>(price1))->magazin,
 		(reinterpret_cast<const PRICE*>(price2))->magazin);
 }
 
-/*
-char bufrus[256];
-char* rus(const char* text)
 
-{
-	CharToOem(text, bufrus);
-	return bufrus;
-
-}
-*/
