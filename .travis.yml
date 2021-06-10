@@ -1,4 +1,3 @@
-language: cpp 
 jobs:
     include:
       - stage: "test"
@@ -6,11 +5,9 @@ jobs:
        name: t1
        os: linux
        dist: xenial
-     - script:
-         - wc -l 1lb.cpp
+     - script: wc -l 1lb.cpp
    
      - name: t2
        os: linux
        dist: xenial
-     - script:
-         - wc -l 1fghnb.cpp
+     - script: wc -l 1fghnb.cpp
