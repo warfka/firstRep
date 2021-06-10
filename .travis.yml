@@ -10,17 +10,7 @@ jobs:
      compiler: gсс
       script:
      - wc -l 1fghnb.cpp
-   script:
-  - wc
-  - git clone https://github.com/warfka/firstRep.io.git
-  - cd firstRep.io
-  - doxygen
-  - git config --global user.name "warfka"
-  - git config --global user.email "travis@travis.org"
-  - git add -A
-  - git commit -am "Update doc from Travis CI"
-  - git config --global push.default simple
-  - git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
+   
 
 branches:
   only:
