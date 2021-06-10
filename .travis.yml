@@ -8,7 +8,7 @@ jobs:
       compiler: gcc
       script:
         - wc -l lb1.cpp
-        - gcc -c lb1.cpp -o 111.txt
+        - gcc lb1.cpp -o 111
         
         
     - stage: Documentation
