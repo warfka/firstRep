@@ -3,46 +3,12 @@ jobs:
   include:
     - stage: "Building"
     
-      name: "Building"
+      name: "Check"
       os: linux
       compiler: gcc
       script:
-        - gcc -fPIC -c matrixfact.c -o matrixfact.o
-        - gcc -shared matrixfact.o -o libmatrixfact.so
-        - gcc -I`pwd` -L`pwd` dinoPRO.c -lmatrixfact -o dinoPRO
-        
-        
-    - stage: Documentation
-    
-      name: "Documentation"
-      os: linux
-      compiler: gcc
-      before_install:
-        - sudo apt-get install doxygen
-      script:
-        - git clone https://github.com/ImyaPolzovatelyaPolzovatel/Doxygen.git
-        - mv Doxyfile matrixfact.c Doxygen/
-        - cd Doxygen
-        - doxygen
-        - rm Doxyfile matrixfact.c
-        - git config --global user.name "travis"
-        - git config --global user.email "2019103620@pnu.edu.ru"
-        - git add -A
-        - git commit -am "Update doc from Travis CI"
-        - git config --global push.default simple
-        - git push -f -q  https://ImyaPolzovatelyaPolzovatel:${GITHUB_API_KEY}@github.com/ImyaPolzovatelyaPolzovatel/Doxygen.git
-
-
-language: cpp
-jobs:
-  include:
-    - stage: "Check"
-    
-     name: "Check"
-     os: linux
-     compiler: gcc
-     script:
         - wc -l lb1.cpp
+        
         
     - stage: Documentation
     
@@ -61,7 +27,3 @@ jobs:
         - git commit -am "Update doc from Travis CI"
         - git config --global push.default simple
         - git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
-        
-
-        
-        
