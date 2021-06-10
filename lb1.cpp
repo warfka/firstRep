@@ -17,7 +17,7 @@ using namespace std;
 	\warning Данная труктура создана только в учебных целях
 
 */
-int main()
+in111t main()
 {
   char str[1000];
     int i, j;
