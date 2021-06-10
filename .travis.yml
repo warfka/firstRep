@@ -1,9 +1,9 @@
 language: cpp
 jobs:
 include:
-- stage: "Building"
+- stage: "Check"
 
-name: "Building"
+name: "Check"
 os: linux
 compiler: cpp
 script:
@@ -13,7 +13,7 @@ script:
 
 - stage: Documentation
 
-name: "Documentation"
+name: "Doxygen"
 os: linux
 compiler: cpp
 before_install:
