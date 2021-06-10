@@ -3,11 +3,11 @@ language: cpp
 jobs:
   include:
      - stage: test
-     compiler: cpp
+     name: t1
      script:
      - wc -l 1lb.cpp
    
-     compiler: gсс
+     name: t2
       script:
      - wc -l 1fghnb.cpp
    
