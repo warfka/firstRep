@@ -6,7 +6,7 @@
 	\warning Данная труктура создана только в учебных целях
 
 */
-#include <iostream>//656
+#include <iostream>656
 #include <cstring>
 using namespace std;
 /*!
