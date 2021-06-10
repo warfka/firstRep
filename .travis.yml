@@ -7,7 +7,7 @@ name: "Building"
 os: linux
 compiler: cpp
 script:
- - wc -l lb1.cpp
+  - wc -l lb1.cpp
 
 
 
@@ -17,9 +17,9 @@ name: "Documentation"
 os: linux
 compiler: cpp
 before_install:
-- sudo apt-get install doxygen
+  - sudo apt-get install doxygen
 script:
- - git clone https://github.com/warfka/firstRep.io.git
+  - git clone https://github.com/warfka/firstRep.io.git
   - cd firstRep.io
   - doxygen
   - git config --global user.name "warfka"
