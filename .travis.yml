@@ -10,8 +10,3 @@ jobs:
      - name: t2
       script:
      - wc -l 1fghnb.cpp
-   
-
-branches:
-  only:
-    - master
