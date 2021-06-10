@@ -1,7 +1,7 @@
 language: cpp
 jobs:
   include:
-   - stage: "Check"
+    - stage: "Check"
     
      name: "Check"
      os: linux
