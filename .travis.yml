@@ -1,13 +1,13 @@
 jobs:
     include:
-     - stage: "test"
+     - stage: "test1"
     
        name: t1
        os: linux
        dist: xenial
      - script: wc -l 1lb.cpp
    
-   
+     - stage: "test2"
      - name: t2
        os: linux
        dist: xenial
