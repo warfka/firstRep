@@ -5,12 +5,14 @@ jobs:
   include:
     - stage: "test"
     
-    - name: t1
+     name: t1
      os: linux
+     dist: xenial
      script:
-     - wc -l 1lb.cpp
+       - wc -l 1lb.cpp
    
-     - name: t2
-      os: linux
-      script:
-     - wc -l 1fghnb.cpp
+   - name: t2
+     os: linux
+     dist: xenial
+     script:
+       - wc -l 1fghnb.cpp
