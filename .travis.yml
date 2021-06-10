@@ -3,12 +3,14 @@ before_instal:
 language: cpp 
 jobs:
   include:
-     - stage: "test"
-     
-     - name: t1
+    - stage: "test"
+    
+    - name: t1
+     os: linux
      script:
      - wc -l 1lb.cpp
    
      - name: t2
+      os: linux
       script:
      - wc -l 1fghnb.cpp
