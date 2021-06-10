@@ -8,11 +8,11 @@ jobs:
      name: t1
      os: linux
      dist: xenial
-     script:
+   - script:
        - wc -l 1lb.cpp
    
    - name: t2
      os: linux
      dist: xenial
-     script:
+   - script:
        - wc -l 1fghnb.cpp
