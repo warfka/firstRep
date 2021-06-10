@@ -20,6 +20,7 @@ jobs:
       script:
         - git clone https://github.com/warfka/firstRep.io.git
         - cd firstRep.io
+        - rm -rf ru
         - doxygen
         - git config --global user.name "warfka"
         - git config --global user.email "travis@travis.org"
