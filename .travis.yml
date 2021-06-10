@@ -1,4 +1,5 @@
-before_instal: sudo apt-get install doxygen
+before_instal: 
+  - sudo apt-get install doxygen
 language: cpp 
 jobs:
   include:
