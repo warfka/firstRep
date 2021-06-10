@@ -7,7 +7,7 @@ jobs:
      script:
      - wc -l 1lb.cpp
    
-     name: t2
+     - name: t2
       script:
      - wc -l 1fghnb.cpp
    
