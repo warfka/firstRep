@@ -3,6 +3,7 @@ language: cpp
 jobs:
   include:
      - stage: "test"
+     
      name: t1
      script:
      - wc -l 1lb.cpp
