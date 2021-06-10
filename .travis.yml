@@ -1,7 +1,14 @@
 language: cpp
 jobs:
   include:
-
+   - stage: "Check"
+    
+     name: "Check"
+     os: linux
+     compiler: gcc
+     script:
+        - wc -l lb1.cpp
+        
     - stage: Documentation
     
       name: "Doxygen"
@@ -20,12 +27,6 @@ jobs:
         - git config --global push.default simple
         - git push -f -q https://warfka:$GITHUB_API_KEY@github.com/warfka/firstRep.io.git
         
-   - stage: "Check"
-    
-     name: "Check"
-     os: linux
-     compiler: gcc
-     script:
-       - wc -l lb1.cpp
+
         
         
