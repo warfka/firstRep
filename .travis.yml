@@ -2,17 +2,17 @@ before_instal:
   - sudo apt-get install doxygen
 language: cpp 
 jobs:
-  include:
-    - stage: "test"
+    include:
+      - stage: "test"
     
-     name: t1
-     os: linux
-     dist: xenial
-   - script:
-       - wc -l 1lb.cpp
+       name: t1
+       os: linux
+       dist: xenial
+     - script:
+         - wc -l 1lb.cpp
    
-   - name: t2
-     os: linux
-     dist: xenial
-   - script:
-       - wc -l 1fghnb.cpp
+     - name: t2
+       os: linux
+       dist: xenial
+     - script:
+         - wc -l 1fghnb.cpp
