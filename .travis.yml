@@ -5,7 +5,7 @@ jobs:
   include:
      - stage: "test"
      
-     name: t1
+     - name: t1
      script:
      - wc -l 1lb.cpp
    
